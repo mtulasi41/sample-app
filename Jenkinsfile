@@ -75,6 +75,16 @@ pipeline{
 		}
 	     }
 	}
-
+	stage('Push Image to dockerhub'){
+             steps{
+	        script{
+		        withCredentials([string(credentialsId: 'git-cred', variable: 'docker-hub-cred')]) {
+				sh 'docker login -u chtulasi -p${docker-hub-cred}'
+				sh 'docker image push chtulasi/$JOB_NAME:v1.BUILD_ID'
+				sh 'docker image push chtulasi/$JOB_NAME:v1.latest'
+			}
+		  }
+	     }
+	}
     }
 }
