@@ -78,7 +78,7 @@ pipeline{
 	stage('Push Image to dockerhub'){
              steps{
 	        script{
-		        withCredentials([string(credentialsId: 'git-cred', variable: 'docker_hub_cred')]) {
+		        withCredentials([string(credentialsId: 'git_cred', variable: 'docker_hub_cred')]) {
 				sh 'docker login -u chtulasi -p${docker_hub_cred}'
 				sh 'docker image push chtulasi/$JOB_NAME:v1.$BUILD_ID'
 				sh 'docker image push chtulasi/$JOB_NAME:v1.latest'
